@@ -14,14 +14,17 @@ let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
+// Substituir nome nas perguntas antes de iniciar o jogo
+substituiNome();
+
 botaoIniciar.addEventListener('click', iniciaJogo);
 
 function iniciaJogo() {
     atual = 0;
     historiaFinal = "";
     telaInicial.style.display = 'none';
-    caixaPerguntas.classList.remove("mostrar");
-    caixaAlternativas.classList.remove("mostrar");
+    caixaPerguntas.classList.add("mostrar");
+    caixaAlternativas.classList.add("mostrar");
     caixaResultado.classList.remove("mostrar");
     mostraPergunta();
 }
@@ -59,10 +62,12 @@ function respostaSelecionada(opcaoSelecionada) {
 }
 
 function mostraResultado() {
-    caixaPerguntas.textContent = 'Em Demon Slayer, ${nome}';
+    caixaPerguntas.textContent = `Em Demon Slayer, ${nome}`;
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
     caixaResultado.classList.add("mostrar");
+    // Remove o evento antes de adicionar um novo
+    botaoJogarNovamente.removeEventListener("click", jogaNovamente);
     botaoJogarNovamente.addEventListener("click", jogaNovamente);
 }
 
@@ -70,7 +75,7 @@ function jogaNovamente() {
     atual = 0;
     historiaFinal = "";
     caixaResultado.classList.remove("mostrar");
-    mostraPergunta();
+    telaInicial.style.display = 'block';
 }
 
 function substituiNome() {
@@ -79,4 +84,3 @@ function substituiNome() {
     }
 }
 
-substituiNome();
